@@ -7,6 +7,10 @@ import MyButton from "../components/Button"
 export default function Login({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
+            <View>
+                <Image style={styles.image}
+                source={require('../assets/frame.svg')}/>
+            </View>
             <View style={styles.textInput}>
                 <TextInput
                 style={styles.input}
@@ -18,6 +22,7 @@ export default function Login({navigation}) {
                 <TextInput
                 style={styles.input}
                 placeholder="Senha"
+                secureTextEntry={true}
                 autoCorrect={false}
                 onChangeText={() => {}}>
                 </TextInput>
@@ -41,14 +46,19 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#ffffff',
+
+    },
+    image: {
+        height: 180,
+        width: 200,
+        margin: 25,
     },
     input:{
-        width: '120%',
         marginBottom: 20,
-        color: '#ccc',
+        color: '#cccccc',
         fontSize: 15,
         borderRadius: 15,
         borderWidth: 2,
@@ -61,7 +71,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     textInput:{
-        alignItems: 'center',
+        width: '80%',
     },
     b: {
         width: '50%'

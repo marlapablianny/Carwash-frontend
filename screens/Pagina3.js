@@ -3,10 +3,44 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 
-
 export default function Pagina3({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
+              <View style={styles.imade1}>
+                <Image style={styles.image}
+                source={require('../assets/home.png')}/>
+            </View>
+            <View style={styles.cadastro}>
+                <Text style={styles.c}> Cadastre seu Lava-jato</Text>
+            </View>
+            <View style={styles.textInput}>
+                <TextInput
+                style={styles.input}
+                placeholder="Nome"
+                autoCorrect={false}
+                onChangeText={() => {}}>
+                </TextInput>
+
+                <TextInput
+                style={styles.input}
+                placeholder="Telefone"
+                autoCorrect={false}
+                onChangeText={() => {}}>
+                </TextInput>
+
+                <TextInput
+                style={styles.input}
+                placeholder="Endereço"
+                autoCorrect={false}
+                onChangeText={() => {}}>
+                </TextInput>
+            </View>
+            <View style={styles.b}>
+                <MyButton text="Cadastrar"
+                    onPress={() => {
+                        navigation.navigate("Pagina1")
+                    }}/>
+            </View>
         </KeyboardAvoidingView>
     )
 }
@@ -18,7 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input:{
-        width: '120%',
         marginBottom: 20,
         color: '#ccc',
         fontSize: 15,
@@ -34,16 +67,30 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     textInput:{
-        alignItems: 'center',
+        width: '80%',
     },
     c: {
-        fontSize: 20,
-        color:'#4A4A4A', 
-        width: '111%', 
-        height: '27%',
+        fontSize: 22,
+        color:'#4A4A4A',
     },
     b: {
         width: '60%'
+    }, 
+    cadastro:{
+        padding: 15
+    },
+    textofinal:{
+        width: '80%',
+        padding: 10
+    },
+    image: {
+        height: 57,
+        width: 280,
+        margin: 50,
+        alignItems: 'center',
+    },
+    image1:{
+        marginTop: 0,
     }
 })
 

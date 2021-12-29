@@ -6,6 +6,10 @@ import MyButton from "../components/Button"
 export default function Cadastro({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
+              <View>
+                <Image style={styles.image}
+                source={require('../assets/home.png')}/>
+            </View>
             <View style={styles.cadastro}>
                 <Text style={styles.c}> Cadastre-se</Text>
             </View>
@@ -67,7 +71,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input:{
-        width: '120%',
         marginBottom: 20,
         color: '#ccc',
         fontSize: 15,
@@ -83,24 +86,30 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     textInput:{
-        alignItems: 'center',
+        width: '80%',
     },
     c: {
-        fontSize: 20,
-        color:'#4A4A4A', 
-        width: '111%', 
-        height: '27%',
+        fontSize: 25,
+        color:'#4A4A4A',
     },
     b: {
         width: '60%'
     }, 
     cadastro:{
-        marginRight: '40%',
-        padding: 7
+        marginRight: '45%',
+        padding: 15
     },
     textofinal:{
-        width: '90%',
+        width: '80%',
         padding: 10
-    }
+    },
+    image: {
+        height: 57,
+        width: 280,
+        margin: 50,
+        marginTop: 10,
+        alignItems: 'center',
+
+    },
 })
 

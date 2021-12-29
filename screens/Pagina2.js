@@ -1,9 +1,9 @@
 const { useState, useEffect } = require("react")
+import { NavigationContainer } from "@react-navigation/native"
 import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
-import Maincontainer from "../components/footer"
-
+import Routes from "../components/routes"
 
 export default function Pagina2({navigation}) {
     return(
@@ -31,7 +31,10 @@ export default function Pagina2({navigation}) {
                         navigation.navigate("Pagina3")
                     }}/>
             </View>
-            <Maincontainer></Maincontainer>
+            <NavigationContainer>
+                <Routes/>
+            </NavigationContainer>
+                    
             
         </KeyboardAvoidingView>
     )
@@ -50,21 +53,19 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 2,
         borderColor: "#cccccc",
-        padding: 8,
-        
+        padding: 8, 
     },
     texto1: {
-        fontWeight: 'semibold',
         fontSize: 20,
         textAlign: 'center',
+        fontWeight: 'bold',
+
     },
     texto2: {
         fontSize: 15,
         textAlign: 'center',
         color: '#4A4A4A',
         justifyContent: 'center',
-
-
     },
     b: {
         width: '60%'
@@ -77,6 +78,12 @@ const styles = StyleSheet.create({
     text0:{
         width: '60%',
         padding: 15,
+    },
+    tab:{
+        backgroundColor: '#cccccc'
+    },
+    TextInput:{
+        width: '80%'
     }
 })
 
