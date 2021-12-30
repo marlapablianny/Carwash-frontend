@@ -38,7 +38,7 @@ export default function Pagina3({navigation}) {
             <View style={styles.b}>
                 <MyButton text="Cadastrar"
                     onPress={() => {
-                        navigation.navigate("Pagina1")
+                        navigation.navigate("Home")
                     }}/>
             </View>
         </KeyboardAvoidingView>

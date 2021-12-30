@@ -7,10 +7,8 @@ import MyButton from "../components/Button"
 export default function Login({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-            <View>
                 <Image style={styles.image}
                 source={require('../assets/frame.svg')}/>
-            </View>
             <View style={styles.textInput}>
                 <TextInput
                 style={styles.input}
@@ -37,7 +35,7 @@ export default function Login({navigation}) {
             <View style={styles.b}>
                 <MyButton text="Entrar"
                     onPress={() => {
-                        navigation.navigate("Pagina2")
+                        navigation.navigate("Home")
                     }}/>
             </View>
         </KeyboardAvoidingView>
@@ -52,9 +50,9 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        height: 180,
-        width: 200,
-        margin: 25,
+        minWidth: 200,
+        minHeight: 200,
+        resizeMode: "contain"
     },
     input:{
         marginBottom: 20,

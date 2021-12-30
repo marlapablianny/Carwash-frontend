@@ -1,10 +1,11 @@
 const { useState, useEffect } = require("react")
+import { NavigationContainer } from "@react-navigation/native"
 import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
 
-export default function Buscar({navigation}) {
+export default function Meulavajato({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.TextInput}>
@@ -16,17 +17,17 @@ export default function Buscar({navigation}) {
                 </TextInput>
             </View>
             <View style={styles.text0}>
-                <Text style={styles.texto1}></Text>
+                <Text style={styles.texto1}>lava</Text>
             </View>
             <View style={styles.text}>
                 <Text style={styles.texto2}></Text>
             </View>
-            {/* <View style={styles.b}>
+            <View style={styles.b}>
                 <MyButton text="Cadastrar Lava-jato"
                     onPress={() => {
                         navigation.navigate("Pagina3")
                     }}/>
-            </View>     */}
+            </View>
         </KeyboardAvoidingView>
     )
 }
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffffff',
         alignItems: 'center',
-        paddingTop: 200,
+        justifyContent: 'center',
     },
     input:{
         marginBottom: 20,
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
+
     },
     texto2: {
         fontSize: 15,

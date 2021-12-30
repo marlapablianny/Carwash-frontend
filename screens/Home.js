@@ -5,7 +5,7 @@ import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, Touchab
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
 
-export default function Pagina2({navigation}) {
+export default function Home({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.TextInput}>
@@ -31,9 +31,8 @@ export default function Pagina2({navigation}) {
                         navigation.navigate("Pagina3")
                     }}/>
             </View>
-            <NavigationContainer>
-                <Routes/>
-            </NavigationContainer>
+            {/* <NavigationContainer> */}
+            {/* </NavigationContainer> */}
                     
             
         </KeyboardAvoidingView>
