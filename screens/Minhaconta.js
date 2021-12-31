@@ -8,25 +8,12 @@ import Routes from "../components/routes"
 export default function Minhaconta({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-            <View style={styles.TextInput}>
-                <TextInput
-                style={styles.input}
-                placeholder="Pesquise por um  lava jato"
-                autoCorrect={false}
-                onChangeText={() => {}}>
-                </TextInput>
-            </View>
-            <View style={styles.text0}>
-                <Text style={styles.texto1}>Minha conta</Text>
+            <View>
+            <Image style={styles.image}
+                source={require('../assets/user.png')}/>
             </View>
             <View style={styles.text}>
                 <Text style={styles.texto2}></Text>
-            </View>
-            <View style={styles.b}>
-                <MyButton text="Cadastrar Lava-jato"
-                    onPress={() => {
-                        navigation.navigate("Pagina3")
-                    }}/>
             </View>
         </KeyboardAvoidingView>
     )
@@ -76,6 +63,11 @@ const styles = StyleSheet.create({
     },
     TextInput:{
         width: '80%'
-    }
+    },
+    image: {
+        height: 150,
+        width: 150,
+        margin: 25,
+    },
 })
 

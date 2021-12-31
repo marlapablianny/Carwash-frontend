@@ -9,6 +9,8 @@ import Buscar from './screens/Buscar';
 import React from 'react';
 import Routes from './components/routes';
 import Minhaconta from './screens/Minhaconta';
+import AgendamentosLava from './screens/AgendamentosLava';
+import Atualizaragenda from './screens/Atualizaragenda';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +53,14 @@ export default function App() {
            <Stack.Screen 
           name="Meulavajato" 
           component={Routes}
+          options={{headerShown: false}}/>
+           <Stack.Screen 
+          name="AgendamentosLava" 
+          component={AgendamentosLava}
+          options={{headerShown: false}}/>
+           <Stack.Screen 
+          name="Atualizaragenda" 
+          component={Atualizaragenda}
           options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>

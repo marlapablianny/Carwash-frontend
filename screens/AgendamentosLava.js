@@ -7,7 +7,7 @@ import Routes from "../components/routes"
 import MyButton1 from "../components/Button1"
 
 
-export default function Meulavajato({navigation}) {
+export default function AgendamentosLava({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.profile}>
@@ -29,37 +29,15 @@ export default function Meulavajato({navigation}) {
                     }}/>
             </View>
             <View style={styles.text}>
-                <Text style={styles.texto3}>Serviços</Text>
+                <Text style={styles.texto3}>Agendamentos</Text>
+            </View>
+            <View style={styles.text}>
+                <Text style={styles.texto4}>Hoje</Text>
             </View>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/circulo.png')}/>
                 <Text style={styles.servico1}> Enceramento profissional</Text>
             </View>
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Polimento de faróis</Text>
-            </View>
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Cristalização de vidros</Text>
-            </View>
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Limpeza técnica de motor</Text>
-            </View> 
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Higienização de ar-condicionado</Text>
-            </View> 
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Higienização interna</Text>
-            </View> 
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/circulo.png')}/>
-                <Text style={styles.servico1}> Limpeza e hidratação de couro</Text>
-            </View>
-            
         </KeyboardAvoidingView>
     )
 }
@@ -140,6 +118,10 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         marginRight: 3,
         marginHorizontal: 10,
+    },
+    texto4: {
+        fontSize: 20,
+        color:'#4a4a4a'
     }
    
 })

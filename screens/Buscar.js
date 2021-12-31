@@ -1,8 +1,10 @@
 const { useState, useEffect } = require("react")
 import React from "react"
-import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
+import { render } from "react-dom"
+import { View, KeyboardAvoidingView, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 export default function Buscar({navigation}) {
     return(
@@ -21,14 +23,9 @@ export default function Buscar({navigation}) {
             <View style={styles.text}>
                 <Text style={styles.texto2}></Text>
             </View>
-            {/* <View style={styles.b}>
-                <MyButton text="Cadastrar Lava-jato"
-                    onPress={() => {
-                        navigation.navigate("Pagina3")
-                    }}/>
-            </View>     */}
         </KeyboardAvoidingView>
     )
+    
 }
 const styles = StyleSheet.create({
     container:{
