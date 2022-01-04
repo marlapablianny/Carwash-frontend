@@ -1,15 +1,20 @@
 const { useState, useEffect } = require("react")
-import { NavigationContainer } from "@react-navigation/native"
 import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
-import MyButton from "../components/Button"
-import Routes from "../components/routes"
 import MyButton1 from "../components/Button1"
+import { Calendar } from "../components/calendar"
 
 
 export default function Atualizaragenda({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
+            <View style={styles.rodainicial}>
+                <Image style={styles.image2}
+                    source={require('../assets/car.png')}/>
+                <View style={styles.roda}>
+                    <Text style={styles.texto4}>Car Wash</Text>
+                </View>
+            </View>   
             <View style={styles.profile}>
                 <Image style={styles.image}
                     source={require('../assets/user.png')}/>
@@ -30,6 +35,11 @@ export default function Atualizaragenda({navigation}) {
             </View>
             <View style={styles.text}>
                 <Text style={styles.texto3}>Agenda</Text>
+            </View>
+             <Text style={styles.fucionamento}>Horario de Fucionamento</Text>
+
+            <View>
+                <Calendar></Calendar>
             </View>
         </KeyboardAvoidingView>
     )
@@ -63,9 +73,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     b: {
-        width: '60%',
+        width: '93%',
         flexDirection: 'row',
-        width: '90%'
+        padding: 10,
     },
     text:{
         width:'90%',
@@ -74,7 +84,9 @@ const styles = StyleSheet.create({
     }, 
     text0:{
         width: '60%',
-        padding: 41,
+        padding: 9,
+        marginRight: 30,
+        marginVertical: 17
     },
     tab:{
         backgroundColor: '#cccccc'
@@ -83,24 +95,22 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     image: {
-        height: 120,
-        width: 120,
-        margin: 25,
+        height: 110,
+        width: 110,
+        margin: 15,
+        marginLeft: 2,
     },
     profile: {
         flexDirection: 'row',
+        width: '80%',
+        paddingTop: 10,
+        alignItems: 'center'
     }, 
     texto3: {
         fontSize: 25,
         color: '#cccccc',
         fontWeight: 'bold',
         marginLeft: 30,
-    },
-    image1: {
-        height: 18,
-        width: 18,
-        margin: 25,
-       marginLeft: 3
     },
     servico: {
         flexDirection: 'row',
@@ -111,7 +121,38 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         marginRight: 3,
         marginHorizontal: 10,
-    }
+    },
+    rodainicial: {
+        flexDirection: 'row',
+        backgroundColor: '#cccccc',
+        marginStart: 70,
+    },
+    roda: {
+        width: '90%',
+        padding: 30,
+       marginRight: 50,
+    },
+    image2: {
+        height: 60,
+        width: 60,
+        margin: 23,
+        marginLeft: 10,
+    },
+    texto4 :{
+        fontSize: 30,
+        color: '#000000',
+        fontWeight: 'bold',
+        marginLeft: 2,
+        marginHorizontal: 50,
+        marginVertical: 10,
+
+    },
+    fucionamento: {
+        fontSize: 22,
+        color: '#cccccc',
+        fontWeight: 'bold',
+        padding: 10,
+    },
    
 })
 

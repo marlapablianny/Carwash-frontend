@@ -15,10 +15,51 @@ export default function Minhaconta({navigation}) {
             <View style={styles.text}>
                 <Text style={styles.texto2}></Text>
             </View>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/mini.png')}/>
+                <Text style={styles.servico1}>Juliana Clara</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/bio.png')}/>
+                <Text style={styles.servico1}>Bio</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/instagram.png')}/>
+                <Text style={styles.servico1}>@julianaabz</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/email.png')}/>
+                <Text style={styles.servico1}>julianab@email.com</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/endereco.png')}/>
+                <Text style={styles.servico1}>Rua Catia</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/telefone.png')}/>
+                <Text style={styles.servico1}>(84) 99920-3525</Text>
+            </View>
+            <Image style={styles.image2} source={require('../assets/linha.png')}/>
         </KeyboardAvoidingView>
     )
 }
 const styles = StyleSheet.create({
+    servico: {
+        flexDirection: 'row',
+        width:'80%',
+    },
+    servico1: {
+        fontSize: 20,
+        marginVertical: 3,
+        marginRight: 5,
+        marginHorizontal: 7,
+        color: '#cccccc'
+    },
     container:{
         flex: 1,
         backgroundColor: '#ffffff',
@@ -68,6 +109,17 @@ const styles = StyleSheet.create({
         height: 150,
         width: 150,
         margin: 25,
+    },
+    image1: {
+        height: 16,
+        width: 16,
+        margin: 10,
+       marginLeft: 2
+    },
+    image2: {
+        height: 2,
+        width: '80%',
+        margin: 2,
     },
 })
 

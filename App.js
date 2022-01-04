@@ -11,6 +11,8 @@ import Routes from './components/routes';
 import Minhaconta from './screens/Minhaconta';
 import AgendamentosLava from './screens/AgendamentosLava';
 import Atualizaragenda from './screens/Atualizaragenda';
+import Detalhes from './screens/Detalhes';
+import Agendar from './screens/Agendar';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +63,14 @@ export default function App() {
            <Stack.Screen 
           name="Atualizaragenda" 
           component={Atualizaragenda}
+          options={{headerShown: false}}/>
+          <Stack.Screen 
+          name="Detalhes" 
+          component={Detalhes}
+          options={{headerShown: false}}/>
+          <Stack.Screen 
+          name="Agendar" 
+          component={Agendar}
           options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>

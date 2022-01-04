@@ -4,51 +4,26 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
+import { Calendar } from "../components/calendar"
+import MyButton1 from "../components/Button1"
+import MyButton2 from "../components/Button2"
+import MyButtonx from "../components/Buttonx"
 
-export default function Agendamentos({navigation}) {
+export default function Agendar({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-              <View style={styles.text0}>
-                <Text style={styles.texto1}> Meus Agendamentos</Text>
-            </View>
-            <View style={styles.text}>
-                <Text style={styles.texto2}> Data</Text>
-            </View>
-            <View style={styles.TextInput}>
-                <TextInput
-                style={styles.input}
-                placeholder="00/00/0000"
-                autoCorrect={false}
-                onChangeText={() => {}}>
-                </TextInput>
-            </View>
-            <View style={styles.user}>
-                <Text style={styles.nome}>Juliana</Text>
-            </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>27/01</Text>
-                    <Text style={styles.hora1}>09:00</Text>
+            <View style={styles.container2}>
+                <View style={styles.text0}>
+                    <Text style={styles.texto1}> Agendar</Text>
                 </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
-
-            </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>10/01</Text>
-                    <Text style={styles.hora1}>16:00</Text>
+                <Text style={styles.fucionamento}>Horário do Agendamento</Text>
+                <View>
+                    <Calendar></Calendar>
                 </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
+                <MyButton2 text="Agendar"
+                    onPress={() => {
+                        navigation.navigate("Agendar")
+                    }}/>
             </View>
         </KeyboardAvoidingView>
     )
@@ -59,6 +34,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    container2: {
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: '#87ceeb',
     },
     input:{
         marginBottom: 20,
@@ -73,6 +55,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
+        color: '#87ceeb'
 
     },
     texto2: {
@@ -92,6 +75,7 @@ const styles = StyleSheet.create({
         color: '#ccc',   
     }, 
     text0:{
+        flexDirection: 'row',
         width: '60%',
         padding: 10,
         color: '#ccc',
@@ -147,6 +131,12 @@ const styles = StyleSheet.create({
         width: 30,
         margin: 45,
        marginLeft: 30
+    },
+    fucionamento: {
+        fontSize: 22,
+        color: '#cccccc',
+        fontWeight: 'bold',
+        padding: 10,
     },
 })
 

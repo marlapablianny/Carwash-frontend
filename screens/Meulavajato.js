@@ -10,6 +10,13 @@ import MyButton1 from "../components/Button1"
 export default function Meulavajato({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
+            <View style={styles.rodainicial}>
+                <Image style={styles.image2}
+                    source={require('../assets/car.png')}/>
+                <View style={styles.roda}>
+                    <Text style={styles.texto4}>Car Wash</Text>
+                </View>
+            </View>   
             <View style={styles.profile}>
                 <Image style={styles.image}
                     source={require('../assets/user.png')}/>
@@ -92,9 +99,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     b: {
-        width: '60%',
+        width: '93%',
         flexDirection: 'row',
-        width: '90%'
+        padding: 10
     },
     text:{
         width:'90%',
@@ -103,7 +110,9 @@ const styles = StyleSheet.create({
     }, 
     text0:{
         width: '60%',
-        padding: 41,
+        padding: 9,
+        marginRight: 30,
+        marginVertical: 17
     },
     tab:{
         backgroundColor: '#cccccc'
@@ -112,12 +121,16 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     image: {
-        height: 120,
-        width: 120,
-        margin: 25,
-    },
+        height: 110,
+        width: 110,
+        margin: 15,
+        marginLeft: 2,
+    }, 
     profile: {
         flexDirection: 'row',
+        width: '80%',
+        padding: 10,
+        alignItems: 'center'
     }, 
     texto3: {
         fontSize: 25,
@@ -126,20 +139,46 @@ const styles = StyleSheet.create({
         marginLeft: 30,
     },
     image1: {
-        height: 18,
-        width: 18,
-        margin: 25,
-       marginLeft: 3
+        height: 16,
+        width: 16,
+        margin: 10,
+       marginLeft: 2
     },
     servico: {
         flexDirection: 'row',
-        width:'80%', 
+        width:'80%',
     },
     servico1: {
         fontSize: 20,
-        marginVertical: 20,
-        marginRight: 3,
-        marginHorizontal: 10,
+        marginVertical: 3,
+        marginRight: 5,
+        marginHorizontal: 7,
+    },
+    rodainicial: {
+        flexDirection: 'row',
+        marginTop: 20,
+        width: '90%'
+
+    },
+    roda: {
+        width: '90%',
+        padding: 41,
+        marginRight: 40,
+    },
+    image2: {
+        height: 70,
+        width: 70,
+        margin: 25,
+       marginLeft: 10,
+    },
+    texto4 :{
+        fontSize: 27,
+        color: '#000000',
+        fontWeight: 'bold',
+        marginLeft: 2,
+        marginHorizontal: 50,
+        marginVertical: 10,
+
     }
    
 })

@@ -5,50 +5,13 @@ import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, Touchab
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
 
-export default function Agendamentos({navigation}) {
+export default function Detalhes({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-              <View style={styles.text0}>
-                <Text style={styles.texto1}> Meus Agendamentos</Text>
-            </View>
-            <View style={styles.text}>
-                <Text style={styles.texto2}> Data</Text>
-            </View>
-            <View style={styles.TextInput}>
-                <TextInput
-                style={styles.input}
-                placeholder="00/00/0000"
-                autoCorrect={false}
-                onChangeText={() => {}}>
-                </TextInput>
-            </View>
-            <View style={styles.user}>
-                <Text style={styles.nome}>Juliana</Text>
-            </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>27/01</Text>
-                    <Text style={styles.hora1}>09:00</Text>
+            <View style={styles.container2}>
+                <View style={styles.text0}>
+                    <Text style={styles.texto1}>Brilho Car</Text>
                 </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
-
-            </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>10/01</Text>
-                    <Text style={styles.hora1}>16:00</Text>
-                </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     )

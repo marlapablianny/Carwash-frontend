@@ -1,10 +1,8 @@
 const { useState, useEffect } = require("react")
 import React from "react"
-import { render } from "react-dom"
 import { View, KeyboardAvoidingView, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
-import MyButton from "../components/Button"
-import Routes from "../components/routes"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import MyButton2 from "../components/Button2"
+
 
 export default function Buscar({navigation}) {
     return(
@@ -17,11 +15,31 @@ export default function Buscar({navigation}) {
                 onChangeText={() => {}}>
                 </TextInput>
             </View>
-            <View style={styles.text0}>
-                <Text style={styles.texto1}></Text>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/user.png')}/>
+                <View style={styles.tab}>
+                    <Text style={styles.name1}>Brilho Car</Text>
+                    <Text style={styles.descricao}>Trabalhamos com lavagem de carro</Text>
+                    <Text style={styles.endereco}>Endereço: Rua Chico Targino</Text>
+                    <Text style={styles.cidade}>Cidade: Natal</Text>
+                    <MyButton2 text="Agendar horário"
+                        onPress={() => {
+                            navigation.navigate("Agendar")
+                        }}/>
+                </View>
             </View>
-            <View style={styles.text}>
-                <Text style={styles.texto2}></Text>
+            <View style={styles.servico}>
+                <Image style={styles.image1} source={require('../assets/user.png')}/>
+                <View style={styles.tab}>
+                    <Text style={styles.name1}>Brilho Car</Text>
+                    <Text style={styles.descricao}>Trabalhamos com lavagem de carro</Text>
+                    <Text style={styles.endereco}>Endereço: Rua Napoleão Bezerra</Text>
+                    <Text style={styles.cidade}>Cidade: Currais Novos</Text>
+                    <MyButton2 text="Agendar horário"
+                        onPress={() => {
+                            navigation.navigate("Agendar")
+                        }}/>
+                </View>
             </View>
         </KeyboardAvoidingView>
     )
@@ -55,7 +73,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     b: {
-        width: '60%'
+        width: '93%',
+        flexDirection: 'row',
+        padding: 10,
     },
     text:{
         width:'90%',
@@ -67,10 +87,46 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     tab:{
-        backgroundColor: '#cccccc'
+        marginEnd: 30,
+        marginLeft: 4,
+        marginVertical: 2
     },
     TextInput:{
         width: '80%'
+    },
+    servico: {
+        flexDirection: 'row',
+        width:'80%', 
+    },
+    image1: {
+        height: 60,
+        width: 60,
+        margin: 18,
+       marginLeft: 2
+    },
+    name1: {
+        fontSize: 20,
+        marginVertical: 10,
+        fontWeight: 'bold',
+        marginRight: 90,
+    },
+    descricao: {
+        fontSize: 15,
+        marginLeft: 2,
+        marginHorizontal: 8,
+        color: '#4a4a4a'
+    },
+    endereco: {
+        fontSize: 15,
+        marginLeft: 2,
+        marginHorizontal: 8,
+        color: '#4a4a4a'
+    },
+    cidade: {
+        fontSize: 15,
+        marginLeft: 2,
+        marginHorizontal: 8,
+        color: '#4a4a4a'
     }
 })
 
