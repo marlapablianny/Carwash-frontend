@@ -7,13 +7,20 @@ import MyButton2 from "../components/Button2"
 export default function Buscar({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-            <View style={styles.TextInput}>
+            <View style={styles.input1}>
+                <View style={styles.TextInput}>
                 <TextInput
-                style={styles.input}
-                placeholder="Pesquise por um  lava jato"
-                autoCorrect={false}
-                onChangeText={() => {}}>
-                </TextInput>
+                    style={styles.input}
+                    placeholder="Pesquise por um  lava jato"
+                    autoCorrect={false}
+                    onChangeText={() => {}}>
+                    </TextInput>
+                </View>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Buscar')
+                    }}>
+                    <Image style={styles.image2} source={require('../assets/loupe.png')}/>
+                </TouchableOpacity>
             </View>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/user.png')}/>
@@ -53,13 +60,15 @@ const styles = StyleSheet.create({
         paddingTop: 200,
     },
     input:{
-        marginBottom: 20,
+        marginBottom: 70,
         color: '#ccc',
         fontSize: 15,
         borderRadius: 15,
         borderWidth: 2,
         borderColor: "#cccccc",
         padding: 8, 
+        marginRight: 10,
+        marginLeft: 30
     },
     texto1: {
         fontSize: 20,
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
         marginVertical: 2
     },
     TextInput:{
-        width: '80%'
+        width: '82%'
     },
     servico: {
         flexDirection: 'row',
@@ -127,6 +136,15 @@ const styles = StyleSheet.create({
         marginLeft: 2,
         marginHorizontal: 8,
         color: '#4a4a4a'
+    },
+    image2: {
+        height: 30,
+        width: 30,
+        margin: 10,
+        marginRight: 20
+    },
+    input1 :{ 
+        flexDirection: 'row',
     }
 })
 

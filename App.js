@@ -13,6 +13,8 @@ import AgendamentosLava from './screens/AgendamentosLava';
 import Atualizaragenda from './screens/Atualizaragenda';
 import Detalhes from './screens/Detalhes';
 import Agendar from './screens/Agendar';
+import Mapa from './components/Mapa';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -71,6 +73,10 @@ export default function App() {
           <Stack.Screen 
           name="Agendar" 
           component={Agendar}
+          options={{headerShown: false}}/>
+           <Stack.Screen 
+          name="Mapa" 
+          component={Mapa}
           options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>

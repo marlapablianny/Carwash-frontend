@@ -32,11 +32,10 @@ export default function Agendamentos({navigation}) {
                 </View>
                 <Text style={styles.nomelava1}>Brilho Car</Text>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
+                    navigation.navigate('Mapa')
                 }}>
                     <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
                 </TouchableOpacity>
-
             </View>
             <View style={styles.c}>
                 <View style={styles.agendamento}>
@@ -45,7 +44,7 @@ export default function Agendamentos({navigation}) {
                 </View>
                 <Text style={styles.nomelava1}>Brilho Car</Text>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Detalhes')
+                    navigation.navigate('Mapa')
                 }}>
                     <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
                 </TouchableOpacity>

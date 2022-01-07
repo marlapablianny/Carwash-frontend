@@ -1,9 +1,40 @@
 const { useState, useEffect } = require("react")
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
+import { Calendar } from '../components/calendar';
+import { Alert } from 'react-native';
+import api from "../src/Services/Api"
 
 export default function Pagina3({navigation}) {
+
+    const [nome, setNome] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [data, setData] = useState('')
+    const [hora, setHora] = useState('')
+    const [agendadeatendimento, setAgendadeAtendimento] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    async function CreateLava() {
+        const token = await AsyncStorage.getItem('access_token')
+        console.log(token);
+        const response =  await api.post('lavajatos', {
+            nomedolavajato: nome,
+            telefone: telefone,
+            endereco: endereco,
+            cidade: cidade,
+            data: data,
+            hora: hora,
+            agendadeatendimento: agendadeatendimento
+        }, {headers: {'Authorization' : `Bearer ${token}`}
+        });
+        Alert.alert('Lava-Jato Cadastrado')
+        navigation.navigate('Home')
+    }
     return(
         <KeyboardAvoidingView style={styles.container}>
               <View style={styles.imade1}>
@@ -18,28 +49,48 @@ export default function Pagina3({navigation}) {
                 style={styles.input}
                 placeholder="Nome"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={nome}
+                onChangeText={nome => setNome(nome)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Telefone"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={telefone}
+                onChangeText={telefone => setTelefone(telefone)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Endereço"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={endereco}
+                onChangeText={endereco => setEndereco(endereco)}>
                 </TextInput>
+
+                <TextInput
+                style={styles.input}
+                placeholder="Cidade"
+                autoCorrect={false}
+                value={cidade}
+                onChangeText={cidade => setCidade(cidade)}>
+                </TextInput>
+
+                <TextInput
+                style={styles.input}
+                placeholder="Agendadeatendimento"
+                autoCorrect={false}
+                value={agendadeatendimento}
+                onChangeText={agendadeatendimento  => setAgendadeAtendimento(agendadeatendimento)}>
+                </TextInput>
+            </View>
+            <View>
+                <Calendar></Calendar>
             </View>
             <View style={styles.b}>
                 <MyButton text="Cadastrar"
-                    onPress={() => {
-                        navigation.navigate("Home")
-                    }}/>
+                    onPress={CreateLava}/>
             </View>
         </KeyboardAvoidingView>
     )

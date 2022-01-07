@@ -11,6 +11,9 @@ export const Calendar = () => {
   const [show, setShow] = useState(false);
   const [textd, setTextdata] = useState('');
   const [texth, setTexthora] = useState('');
+  const [data, setData] = useState('')
+  const [hora, setHora] = useState('')
+
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -43,12 +46,12 @@ export const Calendar = () => {
           <View style={styles.data}>
               <Text style={styles.texto1}>Hoje:</Text>
               <Text style={styles.texto2}>{textd}</Text>
-              <MyButton1 style={styles.b} onPress={showDatepicker} text="   Data   "/>
+              <MyButton1 style={styles.b} value={data} onPress={showDatepicker} onChangeText={data => setData(data)} text="   Data   "/>
           </View>
           <View style={styles.data}>
               <Text style={styles.texto1}>Hora:</Text>
               <Text style={styles.texto2}>{texth}</Text>
-              <MyButton1  style={styles.b2} onPress={showTimepicker} text="    Hora    " />
+              <MyButton1  style={styles.b2} value={hora} onPress={showTimepicker}  onChangeText={hora => setHora(hora)} text="    Hora    " />
 
           </View>
       </View>

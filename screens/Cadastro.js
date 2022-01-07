@@ -1,9 +1,32 @@
 const { useState, useEffect } = require("react")
 import React from "react"
+import { Alert } from "react-native"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
+import api from "../src/Services/Api"
+
 
 export default function Cadastro({navigation}) {
+    const [nome, setNome] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
+    async function CreateUser() {
+        const response =  await api.post('/users', {
+            nome: nome,
+            telefone: telefone,
+            endereco: endereco,
+            email: email,
+            password: password,
+        });
+        Alert.alert('Usuário Cadastrado')
+        navigation.navigate('Pagina1')
+    }
+
+
     return(
         <KeyboardAvoidingView style={styles.container}>
               <View>
@@ -18,35 +41,40 @@ export default function Cadastro({navigation}) {
                 style={styles.input}
                 placeholder="Nome"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={nome}
+                onChangeText={nome => setNome(nome)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Telefone"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={telefone}
+                onChangeText={telefone => setTelefone(telefone)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Endereço"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={endereco}
+                onChangeText={endereco => setEndereco(endereco)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Email"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={email}
+                onChangeText={email => setEmail(email)}>
                 </TextInput>
 
                 <TextInput
                 style={styles.input}
                 placeholder="Senha"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={password}
+                onChangeText={password => setPassword(password)}>
                 </TextInput>
             </View>
             <View style={styles.textofinal}>
@@ -56,9 +84,7 @@ export default function Cadastro({navigation}) {
             </View>
             <View style={styles.b}>
                 <MyButton text="Cadastrar"
-                    onPress={() => {
-                        navigation.navigate("Pagina1")
-                    }}/>
+                    onPress={CreateUser}/>
             </View>
         </KeyboardAvoidingView>
     )

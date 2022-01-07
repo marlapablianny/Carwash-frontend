@@ -1,10 +1,37 @@
 const { useState, useEffect } = require("react")
 import React from "react"
-import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
+import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity} from "react-native"
 import MyButton from "../components/Button"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from "react-native"
 
 
 export default function Login({navigation}) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [logado, setLogado] = useState('')
+    
+    const singIn = async () => {
+        const response =  await api.post('/auth/login', {
+            email: email,
+            password: password,
+        });
+
+        const {access_token} = response.data;
+
+        await AsyncStorage.setItem('access_token', access_token);
+        if(access_token) {
+            setLogado(true)
+            navigation.navigate('Home')
+        } else {
+            setLogado(false)
+            Alert.alert('Login ou senha errados.')
+
+        }
+
+    }
+
     return(
         <KeyboardAvoidingView style={styles.container}>
                 <Image style={styles.image}
@@ -14,15 +41,16 @@ export default function Login({navigation}) {
                 style={styles.input}
                 placeholder="Email"
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={email}
+                onChangeText={email => setEmail(email)}>
                 </TextInput>
-
                 <TextInput
                 style={styles.input}
                 placeholder="Senha"
                 secureTextEntry={true}
                 autoCorrect={false}
-                onChangeText={() => {}}>
+                value={password}
+                onChangeText={password => setPassword(password)}>
                 </TextInput>
             </View>
             <View>
@@ -34,9 +62,7 @@ export default function Login({navigation}) {
             </View>
             <View style={styles.b}>
                 <MyButton text="Entrar"
-                    onPress={() => {
-                        navigation.navigate("Home")
-                    }}/>
+                    onPress={singIn}/>
             </View>
         </KeyboardAvoidingView>
     )

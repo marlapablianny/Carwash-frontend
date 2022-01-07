@@ -8,13 +8,20 @@ import Routes from "../components/routes"
 export default function Home({navigation}) {
     return(
         <KeyboardAvoidingView style={styles.container}>
-            <View style={styles.TextInput}>
+            <View style={styles.input1}>
+                <View style={styles.TextInput}>
                 <TextInput
-                style={styles.input}
-                placeholder="Pesquise por um  lava jato"
-                autoCorrect={false}
-                onChangeText={() => {}}>
-                </TextInput>
+                    style={styles.input}
+                    placeholder="Pesquise por um  lava jato"
+                    autoCorrect={false}
+                    onChangeText={() => {}}>
+                    </TextInput>
+                </View>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Buscar')
+                    }}>
+                    <Image style={styles.image1} source={require('../assets/loupe.png')}/>
+                </TouchableOpacity>
             </View>
             <View style={styles.text0}>
                 <Text style={styles.texto1}>Seja Bem Vindo ao 
@@ -31,10 +38,6 @@ export default function Home({navigation}) {
                         navigation.navigate("Pagina3")
                     }}/>
             </View>
-            {/* <NavigationContainer> */}
-            {/* </NavigationContainer> */}
-                    
-            
         </KeyboardAvoidingView>
     )
 }
@@ -46,13 +49,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input:{
-        marginBottom: 20,
+        marginBottom: 70,
         color: '#ccc',
         fontSize: 15,
         borderRadius: 15,
         borderWidth: 2,
         borderColor: "#cccccc",
         padding: 8, 
+        marginLeft: 30,
+        marginRight: 10
+        
     },
     texto1: {
         fontSize: 20,
@@ -82,7 +88,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#cccccc'
     },
     TextInput:{
-        width: '80%'
+        width: '82%',
+    },
+    image1: {
+        height: 30,
+        width: 30,
+        margin: 10,
+        marginRight: 20
+    },
+    input1 :{ 
+        flexDirection: 'row',
     }
 })
 
