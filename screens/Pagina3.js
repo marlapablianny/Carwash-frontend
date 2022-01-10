@@ -16,24 +16,28 @@ export default function Pagina3({navigation}) {
     const [data, setData] = useState('')
     const [hora, setHora] = useState('')
     const [agendadeatendimento, setAgendadeAtendimento] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [sabado, setSabado] = useState('')
+    const [segundaasexta, setSegundaasexta] = useState('')
 
     async function CreateLava() {
         const token = await AsyncStorage.getItem('access_token')
-        console.log(token);
         const response =  await api.post('lavajatos', {
             nomedolavajato: nome,
             telefone: telefone,
             endereco: endereco,
             cidade: cidade,
-            data: data,
-            hora: hora,
-            agendadeatendimento: agendadeatendimento
+            agendadeatendimento: agendadeatendimento,
+            segundaasexta: segundaasexta,
+            sabado: sabado
         }, {headers: {'Authorization' : `Bearer ${token}`}
         });
         Alert.alert('Lava-Jato Cadastrado')
         navigation.navigate('Home')
+    }
+
+    const pegarUsuarioLogado = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        return await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
     }
     return(
         <KeyboardAvoidingView style={styles.container}>
@@ -79,14 +83,29 @@ export default function Pagina3({navigation}) {
 
                 <TextInput
                 style={styles.input}
-                placeholder="Agendadeatendimento"
+                placeholder="Agenda de atendimento"
                 autoCorrect={false}
                 value={agendadeatendimento}
                 onChangeText={agendadeatendimento  => setAgendadeAtendimento(agendadeatendimento)}>
                 </TextInput>
             </View>
-            <View>
-                <Calendar></Calendar>
+            <Text style={styles.fucionamento}>Horario de Fucionamento</Text>
+            <View style={styles.textInput}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Segunda á Sexta"
+                    autoCorrect={false}
+                    value={segundaasexta}
+                    onChangeText={segundaasexta => setSegundaasexta(segundaasexta)}>
+                    </TextInput>
+
+                    <TextInput
+                    style={styles.input}
+                    placeholder="Sabado"
+                    autoCorrect={false}
+                    value={sabado}
+                    onChangeText={sabado  => setSabado(sabado)}>
+                    </TextInput>
             </View>
             <View style={styles.b}>
                 <MyButton text="Cadastrar"
@@ -142,6 +161,12 @@ const styles = StyleSheet.create({
     },
     image1:{
         marginTop: 0,
-    }
+    },
+    fucionamento: {
+        fontSize: 22,
+        color: '#cccccc',
+        fontWeight: 'bold',
+        padding: 10,
+    },
 })
 

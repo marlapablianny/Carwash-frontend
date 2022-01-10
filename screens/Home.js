@@ -4,8 +4,33 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Home({navigation}) {
+    const [lavajato, setLavajato] = useState({})
+    const [cidade, setCidade] = useState('')
+
+    const pegarLavajato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+        return data.lavajato
+    }
+
+    useEffect(() => {
+        pegarLavajato().then((data) => {
+            setLavajato({ ...data })
+        })
+    }, [])
+
+    const BuscarLavaJato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        console.log(cidade)
+        const response = await api.post('/lavajatos/busca', {cidade}, {headers: {'Authorization' : `Bearer ${token}`}} )
+        navigation.navigate('Buscar')
+    }
+
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.input1}>
@@ -14,12 +39,11 @@ export default function Home({navigation}) {
                     style={styles.input}
                     placeholder="Pesquise por um  lava jato"
                     autoCorrect={false}
-                    onChangeText={() => {}}>
+                    value={cidade}
+                    onChangeText={cidade => setCidade (cidade)}>
                     </TextInput>
                 </View>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Buscar')
-                    }}>
+                <TouchableOpacity onPress={BuscarLavaJato}>
                     <Image style={styles.image1} source={require('../assets/loupe.png')}/>
                 </TouchableOpacity>
             </View>

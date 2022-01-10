@@ -5,9 +5,27 @@ import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, Touchab
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
 import MyButton1 from "../components/Button1"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 export default function Meulavajato({navigation}) {
+    const [lavajato, setLavajato] = useState({})
+
+    const pegarLavajato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+        return data.lavajato
+    }
+
+    useEffect(() => {
+        pegarLavajato().then((data) => {
+            setLavajato({ ...data })
+        })
+    }, [])
+
+
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.rodainicial}>
@@ -21,7 +39,7 @@ export default function Meulavajato({navigation}) {
                 <Image style={styles.image}
                     source={require('../assets/user.png')}/>
                     <View style={styles.text0}>
-                        <Text style={styles.texto1}> Limpa Car</Text>
+                        <Text style={styles.texto1}>{lavajato.nomedolavajato}</Text>
                         <Text style={styles.texto2}>Seu Lava-jato</Text>
                     </View>
             </View>

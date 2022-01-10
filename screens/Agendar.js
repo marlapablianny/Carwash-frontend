@@ -8,8 +8,37 @@ import { Calendar } from "../components/calendar"
 import MyButton1 from "../components/Button1"
 import MyButton2 from "../components/Button2"
 import MyButtonx from "../components/Buttonx"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Agendar({navigation}) {
+
+export default function Agendar({navigation, route}) {
+    const [lavajato, setLavajato] = useState({})
+    const [data, setData] = useState('')
+    const [hora, setHora] = useState('')
+
+    const pegarLavajato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+        return data.lavajato
+    }
+
+    useEffect(() => {
+        pegarLavajato().then((data) => {
+            setLavajato({ ...data })
+        })
+        console.log()
+    }, [])
+
+    const Agendar = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const response = await api.post('agendas', {
+            data: data,
+            hora: hora,
+            idLavajato: route.params.idLavajato
+        }, {headers: {'Authorization' : `Bearer ${token}`}}) 
+        Navigate.navigation('Buscar')
+    }
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.container2}>
@@ -17,13 +46,25 @@ export default function Agendar({navigation}) {
                     <Text style={styles.texto1}> Agendar</Text>
                 </View>
                 <Text style={styles.fucionamento}>Horário do Agendamento</Text>
-                <View>
-                    <Calendar></Calendar>
-                </View>
+                <View style={styles.textInput}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Data"
+                        autoCorrect={false}
+                        value={data}
+                        onChangeText={data => setData(data)}>
+                    </TextInput>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Hora"
+                        autoCorrect={false}
+                        value={hora}
+                        onChangeText={hora  => setHora(hora)}>
+                    </TextInput>
+            </View>
                 <MyButton2 text="Agendar"
-                    onPress={() => {
-                        navigation.navigate("Agendar")
-                    }}/>
+                    onPress={Agendar}/>
             </View>
         </KeyboardAvoidingView>
     )

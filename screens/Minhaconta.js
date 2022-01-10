@@ -4,8 +4,24 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Minhaconta({navigation}) {
+    const [usuario, setUsuario] = useState({})
+
+    const pegarUsuarioLogado = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        return await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+    }
+
+    useEffect(() => {
+        pegarUsuarioLogado().then(({ data }) => {
+            setUsuario({ ...data })
+        })
+    }, [])
+
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View>
@@ -17,7 +33,7 @@ export default function Minhaconta({navigation}) {
             </View>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/mini.png')}/>
-                <Text style={styles.servico1}>Juliana Clara</Text>
+                <Text style={styles.servico1}>{ usuario.nome }</Text>
             </View>
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
             <View style={styles.servico}>
@@ -27,22 +43,22 @@ export default function Minhaconta({navigation}) {
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/instagram.png')}/>
-                <Text style={styles.servico1}>@julianaabz</Text>
+                <Text style={styles.servico1}>{usuario.insta}</Text>
             </View>
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/email.png')}/>
-                <Text style={styles.servico1}>julianab@email.com</Text>
+                <Text style={styles.servico1}>{usuario.email}</Text>
             </View>
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/endereco.png')}/>
-                <Text style={styles.servico1}>Rua Catia</Text>
+                <Text style={styles.servico1}>{usuario.endereco}</Text>
             </View>
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
             <View style={styles.servico}>
                 <Image style={styles.image1} source={require('../assets/telefone.png')}/>
-                <Text style={styles.servico1}>(84) 99920-3525</Text>
+                <Text style={styles.servico1}>{usuario.telefone}</Text>
             </View>
             <Image style={styles.image2} source={require('../assets/linha.png')}/>
         </KeyboardAvoidingView>

@@ -3,9 +3,40 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton1 from "../components/Button1"
 import { Calendar } from "../components/calendar"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import MyButton from "../components/Button"
+
 
 
 export default function Atualizaragenda({navigation}) {
+    const [lavajato, setLavajato] = useState({})
+    const [sabado, setSabado] = useState('')
+    const [segundaasexta, setSegundaasexta] = useState('')
+
+    const pegarLavajato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+        return data.lavajato
+    }
+
+    useEffect(() => {
+        pegarLavajato().then((data) => {
+            setLavajato({ ...data })
+        })
+    }, [])
+
+    const Atualizaragendalavajato = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const response = await api.patch('lavajatos', {
+            segundaasexta: segundaasexta,
+            sabado: sabado
+        }, {headers: {'Authorization' : `Bearer ${token}`}}) 
+
+    }
+
+
+
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.rodainicial}>
@@ -19,7 +50,7 @@ export default function Atualizaragenda({navigation}) {
                 <Image style={styles.image}
                     source={require('../assets/user.png')}/>
                     <View style={styles.text0}>
-                        <Text style={styles.texto1}> Limpa Car</Text>
+                        <Text style={styles.texto1}> {lavajato.nomedolavajato}</Text>
                         <Text style={styles.texto2}>Seu Lava-jato</Text>
                     </View>
             </View>
@@ -37,9 +68,26 @@ export default function Atualizaragenda({navigation}) {
                 <Text style={styles.texto3}>Agenda</Text>
             </View>
              <Text style={styles.fucionamento}>Horario de Fucionamento</Text>
+             <View style={styles.textInput}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Segunda á Sexta"
+                    autoCorrect={false}
+                    value={segundaasexta}
+                    onChangeText={segundaasexta => setSegundaasexta(segundaasexta)}>
+                    </TextInput>
 
-            <View>
-                <Calendar></Calendar>
+                    <TextInput
+                    style={styles.input}
+                    placeholder="Sabado"
+                    autoCorrect={false}
+                    value={sabado}
+                    onChangeText={sabado  => setSabado(sabado)}>
+                    </TextInput>
+            </View>
+            <View style={styles.b1}>
+                <MyButton text="Atualizar Agenda"
+                    onPress={Atualizaragendalavajato}/>
             </View>
         </KeyboardAvoidingView>
     )
@@ -58,7 +106,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 2,
         borderColor: "#cccccc",
-        padding: 8, 
+        padding: 7, 
     },
     texto1: {
         fontSize: 30,
@@ -92,7 +140,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#cccccc'
     },
     TextInput:{
-        width: '80%'
+        width: '90%'
     },
     image: {
         height: 110,
@@ -152,6 +200,9 @@ const styles = StyleSheet.create({
         color: '#cccccc',
         fontWeight: 'bold',
         padding: 10,
+    },
+    b1: {
+        padding: 15,
     },
    
 })

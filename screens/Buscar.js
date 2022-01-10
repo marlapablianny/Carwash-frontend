@@ -1,10 +1,21 @@
 const { useState, useEffect } = require("react")
 import React from "react"
 import { View, KeyboardAvoidingView, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MyButton2 from "../components/Button2"
+import api from "../src/Services/Api";
 
 
 export default function Buscar({navigation}) {
+    const [lavajatos, setLavajatos] = useState([])
+    const [cidade, setCidade] = useState('')
+
+    const BuscarLavaJatos = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.post('/lavajatos/busca', {cidade}, {headers: {'Authorization' : `Bearer ${token}`}} )
+        setLavajatos([...data])
+    }
+
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.input1}>
@@ -13,41 +24,29 @@ export default function Buscar({navigation}) {
                     style={styles.input}
                     placeholder="Pesquise por um  lava jato"
                     autoCorrect={false}
-                    onChangeText={() => {}}>
+                    value={cidade}
+                    onChangeText={cidade =>  setCidade(cidade)}>
                     </TextInput>
                 </View>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Buscar')
-                    }}>
+                <TouchableOpacity onPress={BuscarLavaJatos}>
                     <Image style={styles.image2} source={require('../assets/loupe.png')}/>
                 </TouchableOpacity>
-            </View>
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/user.png')}/>
-                <View style={styles.tab}>
-                    <Text style={styles.name1}>Brilho Car</Text>
-                    <Text style={styles.descricao}>Trabalhamos com lavagem de carro</Text>
-                    <Text style={styles.endereco}>Endereço: Rua Chico Targino</Text>
-                    <Text style={styles.cidade}>Cidade: Natal</Text>
-                    <MyButton2 text="Agendar horário"
-                        onPress={() => {
-                            navigation.navigate("Agendar")
-                        }}/>
-                </View>
-            </View>
-            <View style={styles.servico}>
-                <Image style={styles.image1} source={require('../assets/user.png')}/>
-                <View style={styles.tab}>
-                    <Text style={styles.name1}>Brilho Car</Text>
-                    <Text style={styles.descricao}>Trabalhamos com lavagem de carro</Text>
-                    <Text style={styles.endereco}>Endereço: Rua Napoleão Bezerra</Text>
-                    <Text style={styles.cidade}>Cidade: Currais Novos</Text>
-                    <MyButton2 text="Agendar horário"
-                        onPress={() => {
-                            navigation.navigate("Agendar")
-                        }}/>
-                </View>
-            </View>
+            </View> 
+                 {lavajatos && lavajatos.map((lavajato) =>  
+                    <View style={styles.servico} key={lavajato.id}>
+                        <Image style={styles.image1} source={require('../assets/user.png')}/>
+                        <View style={styles.tab}>
+                            <Text style={styles.name1}>{lavajato.nomedolavajato}</Text>
+                            <Text style={styles.descricao}>Trabalhamos com lavagem de carro</Text>
+                            <Text style={styles.endereco}>{lavajato.endereco}</Text>
+                            <Text style={styles.cidade}>{lavajato.cidade}</Text>
+                            <MyButton2 text="Agendar horário"
+                                onPress={() => {
+                                    navigation.navigate("Agendar", { idLavajato: lavajato.id})
+                                }}/> 
+                        </View>
+                    </View>)
+                    }
         </KeyboardAvoidingView>
     )
     

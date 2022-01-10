@@ -4,8 +4,32 @@ import React from "react"
 import { View, KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native"
 import MyButton from "../components/Button"
 import Routes from "../components/routes"
+import api from "../src/Services/Api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Agendamentos({navigation}) {
+    const [usuario, setUsuario] = useState({})
+    const [agendamentos, setAgendamentos] = useState([])
+
+    const pegarUsuarioLogado = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        return await api.get('profile', {headers: {'Authorization' : `Bearer ${token}`}})
+    }
+
+    useEffect(() => {
+        pegarUsuarioLogado().then(({ data }) => {
+            setUsuario({ ...data })
+        })
+        BuscarAgendamentos()
+    }, [])
+    
+    const BuscarAgendamentos = async () => {
+        const token = await AsyncStorage.getItem('access_token')
+        const { data } = await api.post('/agendas/busca', {}, {headers: {'Authorization' : `Bearer ${token}`}} )
+        setAgendamentos([...data])
+    }
+
     return(
         <KeyboardAvoidingView style={styles.container}>
               <View style={styles.text0}>
@@ -23,32 +47,22 @@ export default function Agendamentos({navigation}) {
                 </TextInput>
             </View>
             <View style={styles.user}>
-                <Text style={styles.nome}>Juliana</Text>
+                <Text style={styles.nome}>{usuario.nome}</Text>
             </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>27/01</Text>
-                    <Text style={styles.hora1}>09:00</Text>
-                </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Mapa')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.c}>
-                <View style={styles.agendamento}>
-                    <Text style={styles.data1}>10/01</Text>
-                    <Text style={styles.hora1}>16:00</Text>
-                </View>
-                <Text style={styles.nomelava1}>Brilho Car</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Mapa')
-                }}>
-                    <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
-                </TouchableOpacity>
-            </View>
+            {agendamentos && agendamentos.map((agendamento) =>  
+                <View style={styles.c}>
+                    <View style={styles.agendamento}>
+                        <Text style={styles.data1}>{agendamento.data}</Text>
+                        <Text style={styles.hora1}>{agendamento.hora}</Text>
+                    </View>
+                    <Text style={styles.nomelava1}>Brilho Car</Text>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('Mapa')
+                    }}>
+                        <Image style={styles.image1} source={require('../assets/localizacao.png')}/>
+                    </TouchableOpacity>
+                </View>)
+            }
         </KeyboardAvoidingView>
     )
 }
